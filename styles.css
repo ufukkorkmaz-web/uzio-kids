@@ -1,5 +1,4 @@
-
-  :root{
+:root{
     --ink:#0c2a4a; --ink-soft:#26496d; --accent:#0a52c4; --warm:#e8590c;
     --font:'Nunito','SF Pro Rounded',ui-rounded,-apple-system,'Segoe UI',system-ui,sans-serif;
     /* glass tokens */
@@ -145,6 +144,8 @@
   .act:nth-child(1){--a1:rgba(255,196,222,.82);--a2:rgba(255,150,195,.5)}
   .act:nth-child(2){--a1:rgba(176,236,255,.85);--a2:rgba(110,196,255,.5)}
   .act:nth-child(3){--a1:rgba(255,242,170,.88);--a2:rgba(255,208,100,.55)}
+  .pal img{display:block;width:58px;height:58px;margin:0 auto;filter:drop-shadow(0 3px 3px rgba(4,36,84,.28))}
+  .act .ico svg{display:block;width:1.25em;height:1.25em;margin:0 auto}
   .act:hover{transform:translateY(-9px) scale(1.04)}
   .act:active{transform:scale(.96)}
   .act .ico{font-size:2.6rem;display:block;margin-bottom:8px;font-style:normal;filter:drop-shadow(0 6px 4px rgba(4,36,84,.3));transition:transform .45s cubic-bezier(.3,2,.5,1)}
