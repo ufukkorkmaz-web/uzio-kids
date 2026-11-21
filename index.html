@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Uzio</title>
-<meta name="description" content="Uzio: a playful meadow of learning, games and stories for little explorers.">
+<meta name="description" content="Uzio is a set of games, stories and drawing activities for young kids, with four animal friends.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<!-- Reusable, lightweight SVG backdrop-refraction filters. -->
+<!-- SVG filters for the glass effect; app.js fills these in -->
 <svg width="0" height="0" aria-hidden="true" style="position:absolute;pointer-events:none"><defs id="defs"></defs></svg>
 
 
@@ -40,7 +40,7 @@
 
 <main>
   <section class="scene" id="home" data-tab="0">
-    <!-- Lightweight floating meadow atmosphere (decorative, non-interactive). -->
+    <!-- decorative floating orbs -->
     <div class="landing-atmosphere" aria-hidden="true">
       <span class="meadow-orb orb-one"></span>
       <span class="meadow-orb orb-two"></span>
@@ -49,8 +49,8 @@
     </div>
     <div class="card glass hero-card" data-lens="64,38,4">
       <span class="eyebrow">Welcome to Uzio</span>
-      <h1>Little explorers, <em>wild friends</em></h1>
-      <p>Games, stories and giggles with a fox, a rabbit, a bear and a lion. Learning has never been this sunny.</p>
+      <h1>Play with <em>four animal friends</em></h1>
+      <p>Uzio is a small collection of games, stories and drawing activities for young kids, with a fox, a rabbit, a bear and a lion along for the ride.</p>
       <div class="btn-row">
         <a class="btn glass flat primary" href="#demo">Try the demo</a>
         <a class="btn glass flat ghost" href="#activities">See activities</a>
@@ -60,28 +60,28 @@
 
   <section class="scene" id="demo" data-tab="1">
     <div class="card glass" data-lens="64,38,4">
-      <span class="eyebrow">Interactive demo</span>
-      <h2>Meet the <em>friends</em></h2>
-      <p>Tap a friend to hear what they have to say.</p>
+      <span class="eyebrow">Demo</span>
+      <h2>Say hi to the <em>animals</em></h2>
+      <p>Tap an animal to hear what it has to say.</p>
       <div class="pals" id="pals">
-        <button class="pal glass flat on" data-k="fox" aria-label="Fox">🦊</button>
-        <button class="pal glass flat" data-k="rabbit" aria-label="Rabbit">🐰</button>
-        <button class="pal glass flat" data-k="bear" aria-label="Bear">🐻</button>
-        <button class="pal glass flat" data-k="lion" aria-label="Lion">🦁</button>
+        <button class="pal glass flat on" data-k="fox" aria-label="Fox"><img src="assets/fox.webp" alt="" width="56" height="56"></button>
+        <button class="pal glass flat" data-k="rabbit" aria-label="Rabbit"><img src="assets/rabbit.webp" alt="" width="56" height="56"></button>
+        <button class="pal glass flat" data-k="bear" aria-label="Bear"><img src="assets/bear.webp" alt="" width="56" height="56"></button>
+        <button class="pal glass flat" data-k="lion" aria-label="Lion"><img src="assets/lion.webp" alt="" width="56" height="56"></button>
       </div>
-      <div class="bubble" id="bubble"><b>Felix the Fox:</b> Psst, I have a riddle for you. What has hills but no legs?</div>
+      <div class="bubble" id="bubble"><b>Felix the Fox:</b> Hi, I'm Felix. Here's a riddle for you: what has hands but can't clap?</div>
     </div>
   </section>
 
   <section class="scene" id="activities" data-tab="2">
     <div class="card glass wide" data-lens="64,38,4">
-      <span class="eyebrow">Fun every day</span>
-      <h2>Pick an <em>adventure</em></h2>
-      <p>Short, playful activities made for curious minds.</p>
+      <span class="eyebrow">Activities</span>
+      <h2>Pick an <em>activity</em></h2>
+      <p>Each one only takes a few minutes.</p>
       <div class="acts">
-        <div class="act glass flat" tabindex="0"><i class="ico">🎨</i><h3>Color the Meadow</h3><span class="s">Paint flowers, hills and skies.</span></div>
-        <div class="act glass flat" tabindex="0"><i class="ico">🔢</i><h3>Count the Critters</h3><span class="s">Spot and count hidden friends.</span></div>
-        <div class="act glass flat" tabindex="0"><i class="ico">📖</i><h3>Story Time</h3><span class="s">Bedtime tales with every animal.</span></div>
+        <div class="act glass flat" tabindex="0"><i class="ico"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M24 5C12 5 4 13 4 24s8 19 18 19c4 0 5-3 3-6s0-6 4-6h6c5 0 9-3 9-8C44 13 36 5 24 5Z" fill="#f3d3a0" stroke="#6b4423" stroke-width="2" stroke-linejoin="round"/><circle cx="14" cy="23" r="3.200" fill="#e8318a"/><circle cx="19" cy="13.500" r="3.200" fill="#ffd34d"/><circle cx="30" cy="13" r="3.200" fill="#2bb673"/><circle cx="37" cy="22" r="3.200" fill="#3b82f6"/></svg></i><h3>Color the Meadow</h3><span class="s">Fill in flowers, hills and a big sky.</span></div>
+        <div class="act glass flat" tabindex="0"><i class="ico"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><g fill="#3b82f6"><path d="M24 24c-6 0-11 5-11 9.500 0 4 3.500 5.500 6.500 5 2-.4 3-1.200 4.500-1.200s2.500.8 4.500 1.200c3 .5 6.500-1 6.500-5C35 29 30 24 24 24Z"/><ellipse cx="11" cy="22" rx="3.600" ry="4.600" transform="rotate(-18 11 22)"/><ellipse cx="19" cy="12.500" rx="3.800" ry="5"/><ellipse cx="29" cy="12.500" rx="3.800" ry="5"/><ellipse cx="37" cy="22" rx="3.600" ry="4.600" transform="rotate(18 37 22)"/></g></svg></i><h3>Count the Critters</h3><span class="s">Find the hidden animals and count them.</span></div>
+        <div class="act glass flat" tabindex="0"><i class="ico"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M3 11v29c7-2 15-2 21 1 6-3 14-3 21-1V11Z" fill="#e8318a"/><path d="M24 12C18 8 11 8 5 10v27c6-2 13-2 19 1Z" fill="#fffdf7" stroke="#6b4423" stroke-width="1.800" stroke-linejoin="round"/><path d="M24 12c6-4 13-4 19-2v27c-6-2-13-2-19 1Z" fill="#fffdf7" stroke="#6b4423" stroke-width="1.800" stroke-linejoin="round"/><path d="M10 17c3-.8 6-.8 9 .3M10 23c3-.8 6-.8 9 .3M29 17.300c3-1.100 6-1.100 9-.3M29 23.300c3-1.100 6-1.100 9-.3" fill="none" stroke="#c9b9a0" stroke-width="1.600" stroke-linecap="round"/></svg></i><h3>Story Time</h3><span class="s">A short bedtime story for each animal.</span></div>
       </div>
     </div>
   </section>
@@ -89,21 +89,21 @@
   <section class="scene" id="about" data-tab="3">
     <div class="card glass" data-lens="64,38,4">
       <span class="eyebrow">About us</span>
-      <h2>Made with <em>love</em> for little ones</h2>
-      <p>We are the small team of teachers, artists and parents behind Uzio, and we believe play is the best way to learn. Every friend in our meadow was designed to spark kindness, curiosity and joy.</p>
+      <h2>Who <em>we are</em></h2>
+      <p>We're a handful of teachers, artists and parents. We think kids learn best when they're playing, so we keep the games short and the animals friendly.</p>
       <div class="stats">
         <div class="stat"><b data-count="120">0</b><small>Activities</small></div>
-        <div class="stat"><b data-count="4">0</b><small>Wild friends</small></div>
-        <div class="stat"><b data-count="25">0</b><small>Happy stories</small></div>
+        <div class="stat"><b data-count="4">0</b><small>Animals</small></div>
+        <div class="stat"><b data-count="25">0</b><small>Stories</small></div>
       </div>
     </div>
   </section>
 
   <section class="scene" id="contact" data-tab="4">
     <div class="card glass" data-lens="64,38,4">
-      <span class="eyebrow">Say hello</span>
-      <h2>Ready to join the <em>adventure?</em></h2>
-      <p>Leave your email and we will send you a sneak peek of Uzio.</p>
+      <span class="eyebrow">Contact</span>
+      <h2>Stay in <em>touch</em></h2>
+      <p>Leave your email and we'll send you a preview when Uzio is ready.</p>
       <form id="form">
         <input type="email" placeholder="you@email.com" required aria-label="Email">
         <button class="btn glass flat primary" type="submit">Notify me</button>
