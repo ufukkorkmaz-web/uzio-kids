@@ -185,6 +185,20 @@
   .thanks{margin-top:16px;font-weight:800;color:#0f7a3d;min-height:1.4em}
   footer{position:absolute;bottom:16px;left:0;right:0;text-align:center;font-weight:800;font-size:.85rem;color:#fff;text-shadow:0 2px 6px rgba(4,36,84,.6)}
 
+  /* ---------- Sound toggle ---------- */
+  .sound{
+    --blur:12px;position:fixed;right:24px;bottom:26px;z-index:45;width:58px;height:58px;border-radius:50%;border:0;cursor:pointer;
+    display:grid;place-items:center;
+    background:linear-gradient(160deg,rgba(255,255,255,.42),rgba(255,255,255,.16));
+    transition:transform .35s cubic-bezier(.3,1.8,.5,1);
+  }
+  .sound svg{width:24px;height:24px;filter:drop-shadow(0 1px 1.5px rgba(2,18,52,.8)) drop-shadow(0 2px 5px rgba(2,18,52,.35))}
+  .sound:hover,.sound:focus-visible{transform:scale(1.08);outline:none}
+  .sound:active{transform:scale(.94)}
+  .sound .x{display:none}
+  .sound.off .waves{display:none}
+  .sound.off .x{display:inline}
+
   /* ---------- Scroll cue ---------- */
   .scroll-cue{
     --blur:12px;position:fixed;left:50%;bottom:26px;z-index:45;transform:translateX(-50%);
