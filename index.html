@@ -14,6 +14,15 @@
 <!-- SVG filters for the glass effect; app.js fills these in -->
 <svg width="0" height="0" aria-hidden="true" style="position:absolute;pointer-events:none"><defs id="defs"></defs></svg>
 
+<!-- Fixed backgrounds. app.js crossfades these as you scroll. -->
+<div class="backdrop" id="backdrop" aria-hidden="true">
+  <div class="bg" id="bg-home"></div>
+  <div class="bg" id="bg-demo"></div>
+  <div class="bg" id="bg-activities"></div>
+  <div class="bg" id="bg-about"></div>
+  <div class="bg" id="bg-contact"></div>
+</div>
+
 
 
 <header class="nav-wrap">
@@ -31,7 +40,7 @@
   </div>
 </header>
 
-<div class="veil" id="veil" aria-hidden="true"><div class="panel"></div></div>
+
 
 <button class="scroll-cue glass" id="cue" type="button" aria-label="Scroll down" data-lens="30,18,3">
   <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v15"/><path d="M5.5 12.5 12 19l6.5-6.5"/></svg>
