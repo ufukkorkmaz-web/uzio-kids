@@ -1,5 +1,77 @@
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Sound ----------
+     Everything is generated with the Web Audio API, so there are no audio files.
+     Nothing plays until the visitor taps something, and the mute choice is remembered. */
+  const sfx = (() => {
+    let ctx = null, master = null, muted = false;
+    try { muted = localStorage.getItem('uzio-muted') === '1'; } catch (e) {}
+    const start = () => {
+      if (muted) return null;
+      if (!ctx){
+        const C = window.AudioContext || window.webkitAudioContext;
+        if (!C) return null;
+        ctx = new C(); master = ctx.createGain(); master.gain.value = .7; master.connect(ctx.destination);
+      }
+      if (ctx.state === 'suspended') ctx.resume();
+      return ctx;
+    };
+    function tone({f = 440, to = f, dur = .15, type = 'sine', vol = .2, at = 0, vib = 0, lp = 0, lpTo = lp}){
+      const c = start(); if (!c) return;
+      const t0 = c.currentTime + at, osc = c.createOscillator(), g = c.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(f, t0);
+      osc.frequency.exponentialRampToValueAtTime(Math.max(to, 20), t0 + dur);
+      g.gain.setValueAtTime(.0001, t0);
+      g.gain.exponentialRampToValueAtTime(vol, t0 + Math.min(.02, dur / 3));
+      g.gain.exponentialRampToValueAtTime(.0001, t0 + dur);
+      let out = osc;
+      if (lp){
+        const flt = c.createBiquadFilter(); flt.type = 'lowpass';
+        flt.frequency.setValueAtTime(lp, t0); flt.frequency.exponentialRampToValueAtTime(Math.max(lpTo, 40), t0 + dur);
+        osc.connect(flt); out = flt;
+      }
+      out.connect(g); g.connect(master);
+      if (vib){
+        const l = c.createOscillator(), lg = c.createGain();
+        l.frequency.value = vib; lg.gain.value = f * .04; l.connect(lg); lg.connect(osc.frequency);
+        l.start(t0); l.stop(t0 + dur + .05);
+      }
+      osc.start(t0); osc.stop(t0 + dur + .05);
+    }
+    function whoosh(){
+      const c = start(); if (!c) return;
+      const len = Math.floor(c.sampleRate * .5), buf = c.createBuffer(1, len, c.sampleRate), d = buf.getChannelData(0);
+      for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+      const src = c.createBufferSource(), bp = c.createBiquadFilter(), g = c.createGain(), t = c.currentTime;
+      src.buffer = buf; bp.type = 'bandpass'; bp.Q.value = .8;
+      bp.frequency.setValueAtTime(250, t); bp.frequency.exponentialRampToValueAtTime(1800, t + .35);
+      g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(.12, t + .12); g.gain.exponentialRampToValueAtTime(.0001, t + .5);
+      src.connect(bp); bp.connect(g); g.connect(master); src.start(t);
+    }
+    return {
+      bell: i => { const f = [523, 659, 784][i % 3]; tone({f, to: f * 1.01, dur: .5, type: 'triangle', vol: .2}); tone({f: f * 2, dur: .35, vol: .06}); },
+      chime: () => [523, 659, 784, 1047].forEach((f, i) => tone({f, dur: .45, type: 'triangle', vol: .17, at: i * .09})),
+      whoosh,
+      pop: () => tone({f: 500, to: 900, dur: .09, vol: .18}),
+      get muted(){ return muted; },
+      toggle(){
+        muted = !muted;
+        try { localStorage.setItem('uzio-muted', muted ? '1' : '0'); } catch (e) {}
+        if (!muted) this.pop();
+        return muted;
+      }
+    };
+  })();
+  const soundBtn = document.getElementById('sound');
+  const paintSound = () => {
+    soundBtn.classList.toggle('off', sfx.muted);
+    soundBtn.setAttribute('aria-pressed', String(sfx.muted));
+    soundBtn.setAttribute('aria-label', sfx.muted ? 'Turn sound on' : 'Mute sound');
+  };
+  soundBtn.addEventListener('click', () => { sfx.toggle(); paintSound(); });
+  paintSound();
   /* Full-surface water-drop refraction. One displacement pass per glass
      surface (instead of the original triple RGB passes), static maps generated
      only when geometry changes, with native-glass fallback in other browsers. */
@@ -132,6 +204,7 @@
     const from = scrollY, to = target.offsetTop, dist = to - from;
     go(+target.dataset.tab);
     if (!dist) return;
+    sfx.whoosh();
     stopTween();
     if (reduce){ scrollTo({top: to, behavior: 'instant'}); return; }
     const ms = Math.min(1200, 650 + Math.abs(dist) / innerHeight * 170), t0 = performance.now();
@@ -258,8 +331,13 @@
     bubble.innerHTML = say[b.dataset.k];
     bubble.classList.remove('pop'); void bubble.offsetWidth; bubble.classList.add('pop');
   });
+  document.querySelectorAll('.act').forEach((el, i) => {
+    el.addEventListener('click', () => sfx.bell(i));
+    el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); sfx.bell(i); } });
+  });
   document.getElementById('form').addEventListener('submit', e => {
     e.preventDefault();
+    sfx.chime();
     document.getElementById('thanks').textContent = 'Thanks, you\'re on the list.';
     e.target.reset();
   });
