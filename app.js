@@ -1,4 +1,3 @@
-
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   /* Full-surface water-drop refraction. One displacement pass per glass
@@ -230,10 +229,10 @@
 
   /* ---------- Demo ---------- */
   const say = {
-    lion:  '<b>Leo the Lion:</b> Roar-some to meet you! I love counting stars. Want to count with me?',
-    bear:  '<b>Benny the Bear:</b> Hi hi! I know where the sweetest berries grow. Follow me!',
-    rabbit:'<b>Rosie the Rabbit:</b> Hop hop hooray! Can you jump like me? One, two, three!',
-    fox:   '<b>Felix the Fox:</b> Psst, I have a riddle for you. What has hills but no legs?'
+    lion:  '<b>Leo the Lion:</b> Hi, I\'m Leo. I\'m counting stars tonight. Want to help me?',
+    bear:  '<b>Benny the Bear:</b> Hi, I\'m Benny. I found some blackberries down by the creek. Come and see!',
+    rabbit:'<b>Rosie the Rabbit:</b> Hi, I\'m Rosie. Can you hop like me? Let\'s do three hops. One, two, three!',
+    fox:   '<b>Felix the Fox:</b> Hi, I\'m Felix. Here\'s a riddle for you: what has hands but can\'t clap?'
   };
   const bubble = document.getElementById('bubble');
   document.getElementById('pals').addEventListener('click', e => {
@@ -244,7 +243,7 @@
   });
   document.getElementById('form').addEventListener('submit', e => {
     e.preventDefault();
-    document.getElementById('thanks').textContent = 'Yay! You are on the list. See you in the meadow 🌼';
+    document.getElementById('thanks').textContent = 'Thanks, you\'re on the list.';
     e.target.reset();
   });
 })();
